@@ -62,16 +62,19 @@ const greaterNums = (a,b,c,d) => {
     return null;
   }
 
-  let equals = 0;
-  if (a == b) { equals++; } 
-  if (a == c) { equals++; } 
-  if (a == d) { equals++; } 
-  if (b == c) { equals++; } 
-  if (b == d) { equals++; } 
-  if (c == d) { equals++; } 
-  console.log(equals);
+  let arr = [a,b,c,d];
+  arr.sort((a,b) => a < b);
+  let max = 0;
+  let curr = 0;
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] == arr[i-1]) {
+      curr++;
+    } else {
+      max = Math.max(max,curr);
+    }
+  }
 
-  switch (equals) {
+  switch (max) {
     case 0:
       return Math.max(a,b,c,d);
     case 1:
@@ -83,7 +86,7 @@ const greaterNums = (a,b,c,d) => {
   }
 }
 
-console.log(greaterNums(10, 7, 16, 80)) //returns 80
-console.log(greaterNums(1.14, 1.14, 5, 7)) //returns "two integers are equal"
-console.log(greaterNums(1.14, 1.14, 1.14, 7)) //returns "three integers are equal"
-console.log(greaterNums("21", 21, 60, 3)) //returns null
+// console.log(greaterNums(10, 7, 16, 80)) //returns 80
+// console.log(greaterNums(1.14, 1.14, 5, 7)) //returns "two integers are equal"
+// console.log(greaterNums(1.14, 1.14, 1.14, 7)) //returns "three integers are equal"
+// console.log(greaterNums("21", 21, 60, 3)) //returns null
