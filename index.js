@@ -1,5 +1,7 @@
 // 1.
 const multiplesOfSixAndNine = () => {
+  // can start at 6, increment by 3
+  // because 6 and 9 is divisible by 3 anyway
   for (let i = 6; i <= 100; i+=3) {
     if (i%6==0 && i%9==0) {
       console.log(i);
@@ -11,6 +13,7 @@ const multiplesOfSixAndNine = () => {
 
 // 2.
 const greaterNum = (a,b) => {
+  // disqualify any non-numbers
   if (typeof(a) != 'number' || typeof(b) != 'number') {
     return null;
   }
@@ -29,6 +32,8 @@ const greaterNum = (a,b) => {
 
 // 3.
 const sumOfFourAndSix = () => {
+  // can start at 4 and increment by 2
+  // because 4 and 6 is divisible by 2!
   let sum = 0;
   for (let i = 4; i <= 1000; i+=2) {
     if (i%4==0 && i%6==0) {
@@ -64,24 +69,41 @@ const sumOfNotDivisibleByTen = () => {
 
 // 6.
 const greaterNums = (a,b,c,d) => {
+  // disqualify non-numbers
   if (typeof(a) != 'number' || typeof(b) != 'number' || typeof(c) != 'number' || typeof(d) != 'number') {
     return null;
   }
 
+  // put args in an array and sort them
   const arr = [a,b,c,d];
   arr.sort((a,b) => a < b);
+
+  // initialize important counters
   let max = 0;
   let curr = 0;
+
+  // scan the array every 2 numbers
   for (let i = 1; i < arr.length; i++) {
+    // if the adjacent numbers are equal
+    // +1 to current/temporary counter
     if (arr[i] == arr[i-1]) {
       curr++;
+    // if the adjacent numbers are NOT equal
+    // since the array is sorted, we can
+    // reset the current/temporary counter
+    // and update the **max** counter if applicable
     } else {
       max = Math.max(max,curr);
       curr = 0;
     }
   }
 
+  // for the case where all arguments are equal
+  // sadly the loop above doesn't exactly cover it!
   max = Math.max(max, curr);
+
+  // based on what the max number of equal args,
+  // return the proper value!
   switch (max) {
     case 0:
       return Math.max(a,b,c,d);
