@@ -71,6 +71,7 @@ const greaterNums = (a,b,c,d) => {
       curr++;
     } else {
       max = Math.max(max,curr);
+      curr = 0;
     }
   }
 
